@@ -40,11 +40,11 @@ public sealed class CosmosDbEmulatorContainer : IAsyncDisposable
 
     public bool IsStarted { get; private set; }
 
-    public async Task<string?> GetConnectionStringAsync()
+    public string GetHost()
     {
-        await InitializeAsync();
-
-        return GetConnectionString();
+        var mappedPort = _container.GetMappedPublicPort(8081);
+        var connectionString = $"https://localhost:{mappedPort}";
+        return connectionString;
     }
 
     public async Task InitializeAsync()
@@ -89,7 +89,7 @@ public sealed class CosmosDbEmulatorContainer : IAsyncDisposable
 
             using (var client = new HttpClient(handler))
             {
-                var response = await client.GetAsync($"{GetConnectionString()}/_explorer/emulator.pem")
+                var response = await client.GetAsync($"{GetHost()}/_explorer/emulator.pem")
                   .ConfigureAwait(false);
 
                 var pem = await response.Content.ReadAsStringAsync()
@@ -100,12 +100,5 @@ public sealed class CosmosDbEmulatorContainer : IAsyncDisposable
                 return response.StatusCode == HttpStatusCode.OK;
             }
         }
-    }
-
-    private string GetConnectionString()
-    {
-        var mappedPort = _container.GetMappedPublicPort(8081);
-        var connectionString = $"https://localhost:{mappedPort}";
-        return connectionString;
     }
 }
