@@ -31,7 +31,7 @@ app.Run();
 static async Task RunDatabaseMigrationsAsync(IServiceProvider serviceProvider)
 {
     var scope = serviceProvider.CreateScope();
-    var migrationRunner = scope.ServiceProvider.GetRequiredService<NotifyMeDbContext>();
+    var migrationRunner = scope.ServiceProvider.GetRequiredService<ProfileDbContext>();
     await migrationRunner.Database.EnsureCreatedAsync();
 }
 

@@ -51,7 +51,7 @@ public class Startup
                  .Bind(Configuration.GetSection(CosmosDbOptions.SectionKey))
                  .ValidateDataAnnotations();
 
-        services.AddDbContext<NotifyMeDbContext>(ConfigureDbCotextOptions);
+        services.AddDbContext<ProfileDbContext>(ConfigureDbCotextOptions);
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
         services.AddScoped<ISubscriptionService, SubscriptionService>();
 

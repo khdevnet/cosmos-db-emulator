@@ -6,7 +6,7 @@ namespace ProfileAPI.Infrastructure.Database;
 public class EfRepository<T> : RepositoryBase<T>, IRepository<T>
     where T : class, IAggregateRoot
 {
-    public EfRepository(NotifyMeDbContext dbContext)
+    public EfRepository(ProfileDbContext dbContext)
         : base(dbContext)
     {
     }

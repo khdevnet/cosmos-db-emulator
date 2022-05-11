@@ -8,12 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ProfileAPI.Infrastructure.Database;
 
-public class NotifyMeDbContext : DbContext
+public class ProfileDbContext : DbContext
 {
     //private readonly IBus _messageBus;
 
-    public NotifyMeDbContext(
-        DbContextOptions<NotifyMeDbContext> options)
+    public ProfileDbContext(
+        DbContextOptions<ProfileDbContext> options)
      : base(options)
     {
     }
